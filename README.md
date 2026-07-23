@@ -1,78 +1,101 @@
-# registry.shwetank.dev
+<div align="center">
 
-Personal portfolio styled as a package registry: `shwetank`, published as a
-package. `pacman -S shwetank` install animation in the hero, skills as an
-interactive dependency graph, projects as packages with stats, life as a
-changelog.
+# `registry.shwetank.dev`
 
-Four ways to read it:
+### A portfolio that ships like a package.
+
+`shwetank`, published as a package. Browse it, `curl` it, `git clone` it, or `npx` it.
+Every one of those is real.
+
+<br>
+
+![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind-v4-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)
+![Output](https://img.shields.io/badge/output-static-cb3837?style=flat-square)
+![npm](https://img.shields.io/npm/v/shwetank?style=flat-square&color=cb3837&label=npx%20shwetank)
+![Arch](https://img.shields.io/badge/Arch-btw-1793d1?style=flat-square&logo=archlinux&logoColor=white)
+
+**[shwetank.dev](https://shwetank.dev)**
+
+<!-- hero shot: drop a screenshot or a short GIF of the install animation here once deployed -->
+
+</div>
+
+---
+
+## Four ways to read it
 
 ```bash
-firefox https://shwetank.dev          # the website
-curl shwetank.dev                     # ANSI card (proxy.ts + app/card)
-git clone https://shwetank.dev        # the domain is a git repo (scripts/build-repo.mjs)
-npx shwetank                          # the real npm package
+firefox https://shwetank.dev        # the website
+curl    shwetank.dev                # an ANSI business card, right in your terminal
+git     clone https://shwetank.dev  # yes, the domain itself is a git repo
+npx     shwetank                    # the real npm package
 ```
 
-## Run
+No tricks behind any of them. `proxy.ts` sniffs the user agent and hands terminals the
+card instead of the HTML. `scripts/build-repo.mjs` bakes a real git repository into
+`public/` at build time, served over git's dumb HTTP. `npx shwetank` is a package I
+actually published.
+
+## The hero terminal is a real shell
+
+The `pacman -S shwetank` install animation plays, then the prompt becomes a working
+shell. Press `/` anywhere to focus it.
+
+`help` · `ls` · `cd <section>` · `cat PKGBUILD` · `neofetch` · `pacman -Qi shwetank`,
+with tab completion and up/down history. And `sudo rm -rf /` does exactly what you'd
+hope, briefly.
+
+Undocumented, on purpose:
+
+| try | you get |
+|-----|---------|
+| `pacman` (no args) | a playable ASCII Pac-Man in the terminal |
+| `sl` | the steam locomotive, obviously |
+| `crt`, or the Konami code | full CRT mode: scanlines, vignette, power-on flicker |
+| `gravity` | everything on screen falls off the page, then floats back |
+| `git log` / `git blame readme.md` | a commit history of a person |
+| `cat /proc/shwetank/status` | you'll see |
+| `make hire-me` | resolves one unmet dependency: your email |
+
+## Built by hand, no libraries
+
+- **Skills graph** is a 3D force-directed constellation: orbit camera, perspective
+  projection, all hand-rolled on a 2D canvas. No three.js. A `[2d]` toggle drops it to a
+  flat, draggable layout.
+- **Theme toggle** wipes between light and dark as a circular reveal from the click
+  point (View Transitions API), with no flash.
+- **Headings** decode out of glyph noise the first time they scroll into view.
+- **Scroll progress** is Pac-Man eating dots toward a ghost. At 100% he catches it.
+- **Sound** is synthesized live with Web Audio. No audio files ship.
+
+No chart library, no animation library, no gradients. A dark theme, sure, but still just
+one red.
+
+## Everything lives in one file
+
+All content, projects, skills, changelog, links, version, sits in **`lib/data.ts`**.
+Edit there, nowhere else. Bump `site.version` (CalVer) whenever you ship something. It's
+part of the joke.
+
+## Stack
+
+Next.js 16 (App Router), TypeScript, Tailwind v4, fully static output. Light and dark
+themes, system preference by default, no flash on reload. Everything works without
+JavaScript: the shell is server-rendered already "installed", the graph falls back to an
+accessible table, and the animation respects `prefers-reduced-motion`.
+
+## Run it
 
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # fully static — deploys to Vercel with zero config
+npm run build    # fully static, deploys to Vercel with zero config
 ```
 
-## Edit content
+---
 
-Everything lives in **`lib/data.ts`** — projects, skills, changelog, links,
-version number. Search for `[PLACEHOLDER]` to find what still needs real data:
-
-- The four projects in `projects` (names, descriptions, stats, links)
-- Changelog dates and specifics
-- One line of the README paragraphs (startup + npm package specifics)
-- `metadataBase` in `app/layout.tsx` (set the real domain)
-
-Bump `site.version` (CalVer) whenever you ship something.
-
-## The shell is real
-
-After the install animation, the hero terminal becomes a working shell
-(press `/` anywhere to focus it). Commands live in `components/shell.ts`:
-`help`, `ls`, `cd <section>`, `cat PKGBUILD`, `neofetch`, `pacman -Qi
-shwetank`, tab completion, ↑/↓ history — and `sudo rm -rf /` does exactly
-what you'd hope, briefly.
-
-Undocumented, by design: `sl` (typo the classic way), `pacman` with no args
-(playable ASCII Pac-Man, arrows/hjkl, q quits), `cat /proc/shwetank/status`,
-`cat /proc/meminfo`, `git log` / `git blame readme.md` / `git status`,
-`systemctl status sleep.timer`, `journalctl`, `make hire-me`, `crt` (full
-CRT-monitor mode with power-on/off collapse; the Konami code also works),
-and `gravity` (everything on screen falls off the page, then floats back).
-
-## Visual layer
-
-- Skills graph is a 3D constellation: force-directed layout in three
-  dimensions, orbit camera, perspective projection — hand-rolled on 2D
-  canvas, no three.js. `[2d]` toggle for the flat draggable version.
-- Theme toggle does a circular wipe from the click point (View Transitions
-  API, graceful fallback).
-- Headings decode out of glyph noise on first scroll into view.
-- The scroll progress bar is Pac-Man eating dots toward a ghost; at 100%
-  he catches it.
-
-## How it's built
-
-- Next.js (App Router) + TypeScript + Tailwind v4, fully static output
-  (page, 404, and the OG image are all prerendered)
-- Light + dark themes: system preference by default, `--dark`/`--light`
-  toggle in the top bar, persisted, no flash on reload
-- Hero terminal replays the install once per session; skippable with Esc;
-  respects `prefers-reduced-motion`; full content is server-rendered so the
-  page works without JS
-- Dependency graph is a hand-rolled force simulation on canvas (draggable,
-  hover to trace edges, theme-aware); the table below it is the
-  accessible/no-JS version
-- Optional synthesized sound effects (Web Audio, `sfx:off` by default in the
-  terminal header)
-- No chart libraries, no animation libraries, no dark gradients — dark
-  *theme*, sure, but still one red
+<div align="center">
+<sub>Arch, btw.</sub>
+</div>
