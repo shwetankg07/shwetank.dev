@@ -23,7 +23,7 @@ export const site = {
 export const readme = {
   paragraphs: [
     "I build products end to end, from the Postgres schema to the pixel. I've worked with early-stage startups where shipping fast and understanding the business mattered as much as the code, and that's shaped how I work: product first, stack second, ego last.",
-    "Along the way I've shipped real things: I reverse-engineered my Acer laptop's keyboard controller when Linux couldn't reach it (kbrgb), drew all 9,298 of India's trains onto a live WebGL map (RailRaag), and published three packages to npm. Right now I'm CTO at chalyaaar runclub, a fitness-first events platform that's small, new, and already in profit. It's all below, versioned like everything else here.",
+    "Along the way I've shipped real things: I reverse-engineered my Acer laptop's keyboard controller when Linux couldn't reach it (kbrgb), drew all 9,298 of India's trains onto a live WebGL map (RailRaag), and published three packages to npm. Right now I'm the CTO at chalyaaar runclub, a fitness-first events platform that's small, new, and already in profit. It's all below, versioned like everything else here.",
     "I'm also going lower in the stack: learning Rust and containerization properly, because the tools I love most are the ones I understand all the way down. I do all of this from a terminal on Arch Linux, btw, inside Neovim.",
   ],
   badges: [
@@ -181,7 +181,7 @@ export const projects: Project[] = [
     name: "chalyaaar runclub",
     version: "1.0.0",
     description:
-      "A fitness-first event and run-club platform where I'm CTO, owning the product and the stack. Small, new, and already in profit: no theater, just something people actually show up for.",
+      "A fitness-first event and run-club platform where I'm the CTO, owning the product and the stack. Small, new, and already in profit: no theater, just something people actually show up for.",
     tags: ["startup", "product", "fitness"],
     stat: "CTO",
     statLabel: "fitness, shipped",
