@@ -1,26 +1,203 @@
 @import "tailwindcss";
 
+/* The Registry palette — near-white or near-black, ink, one red. No gradients, ever. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #fafaf8;
+  --ink: #1c1c1a;
+  --muted: #6e6d66;
+  --faint: #f1f0eb;
+  --hairline: #e5e4dd;
+  --npmred: #cb3837;
+  --npmred-dark: #a32c2b;
+  --stable: #2e7d4f;
+  --term: #171716;
+  --term-text: #d6d4cc;
+  --term-dim: #8a887f;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* dark theme values (duplicated below for the system-preference path) */
+:root[data-theme="dark"] {
+  --paper: #151514;
+  --ink: #e6e4dc;
+  --muted: #94928a;
+  --faint: #201f1d;
+  --hairline: #2b2a27;
+  --npmred: #e05d5b;
+  --npmred-dark: #eb807e;
+  --stable: #57a878;
+  --term: #1d1d1b;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --paper: #151514;
+    --ink: #e6e4dc;
+    --muted: #94928a;
+    --faint: #201f1d;
+    --hairline: #2b2a27;
+    --npmred: #e05d5b;
+    --npmred-dark: #eb807e;
+    --stable: #57a878;
+    --term: #1d1d1b;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-hairline: var(--hairline);
+  --color-npmred: var(--npmred);
+  --color-npmred-dark: var(--npmred-dark);
+  --color-stable: var(--stable);
+  --color-term: var(--term);
+  --color-term-text: var(--term-text);
+  --color-term-dim: var(--term-dim);
+
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-mono: var(--font-jbmono), ui-monospace, "SFMono-Regular", monospace;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--npmred);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--npmred);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Anchored sections land below the sticky bars */
+section[id] {
+  scroll-margin-top: 6.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── theme flip: circular wipe (CSS-driven so the new theme never flashes) ── */
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  animation: none;
+  z-index: 1;
+}
+/* `both` fill clips the incoming layer to a zero-radius circle from its very
+   first painted frame — no unclipped frame means no flash before the wipe.
+   Geometry (--wipe-x/y/r) is set on :root by ThemeToggle before the swap. */
+::view-transition-new(root) {
+  z-index: 2;
+  animation: reg-theme-wipe 550ms cubic-bezier(0.3, 0, 0.2, 1) both;
+}
+@keyframes reg-theme-wipe {
+  from {
+    clip-path: circle(0px at var(--wipe-x, 50%) var(--wipe-y, 0px));
+  }
+  to {
+    clip-path: circle(var(--wipe-r, 150%) at var(--wipe-x, 50%) var(--wipe-y, 0px));
+  }
+}
+
+/* ── CRT mode: `crt` in the shell, or the konami code ─────────────────────── */
+html.crt body {
+  text-shadow: 0 0 0.65px currentColor;
+}
+html.crt body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(10, 10, 8, 0.14) 0px,
+    rgba(10, 10, 8, 0.14) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+html.crt body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 120% 120% at 50% 50%,
+    transparent 55%,
+    rgba(8, 8, 6, 0.28) 100%
+  );
+  animation: crt-flicker 3.6s steps(1) infinite;
+}
+@keyframes crt-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.86; }
+  94% { opacity: 1; }
+  97% { opacity: 0.93; }
+  98% { opacity: 1; }
+}
+/* tv power-on / power-off collapse */
+html.crt-power-on body {
+  animation: crt-on 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+@keyframes crt-on {
+  0% {
+    transform: scaleY(0.004) scaleX(0.7);
+    filter: brightness(6);
+  }
+  55% {
+    transform: scaleY(1.02) scaleX(1);
+    filter: brightness(1.6);
+  }
+  100% {
+    transform: none;
+    filter: none;
+  }
+}
+html.crt-power-off body {
+  animation: crt-off 0.32s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+@keyframes crt-off {
+  0% {
+    transform: none;
+    filter: none;
+  }
+  60% {
+    transform: scaleY(0.006) scaleX(1);
+    filter: brightness(4);
+  }
+  100% {
+    transform: scaleY(0.004) scaleX(0.001);
+    filter: brightness(10);
+  }
 }

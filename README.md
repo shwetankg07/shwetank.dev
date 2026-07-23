@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# registry.shwetank.dev
 
-## Getting Started
+Personal portfolio styled as a package registry: `shwetank`, published as a
+package. `pacman -S shwetank` install animation in the hero, skills as an
+interactive dependency graph, projects as packages with stats, life as a
+changelog.
 
-First, run the development server:
+Four ways to read it:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+firefox https://shwetank.dev          # the website
+curl shwetank.dev                     # ANSI card (proxy.ts + app/card)
+git clone https://shwetank.dev        # the domain is a git repo (scripts/build-repo.mjs)
+npx shwetank                          # the real npm package
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Run
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # fully static — deploys to Vercel with zero config
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Edit content
 
-## Learn More
+Everything lives in **`lib/data.ts`** — projects, skills, changelog, links,
+version number. Search for `[PLACEHOLDER]` to find what still needs real data:
 
-To learn more about Next.js, take a look at the following resources:
+- The four projects in `projects` (names, descriptions, stats, links)
+- Changelog dates and specifics
+- One line of the README paragraphs (startup + npm package specifics)
+- `metadataBase` in `app/layout.tsx` (set the real domain)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Bump `site.version` (CalVer) whenever you ship something.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## The shell is real
 
-## Deploy on Vercel
+After the install animation, the hero terminal becomes a working shell
+(press `/` anywhere to focus it). Commands live in `components/shell.ts`:
+`help`, `ls`, `cd <section>`, `cat PKGBUILD`, `neofetch`, `pacman -Qi
+shwetank`, tab completion, ↑/↓ history — and `sudo rm -rf /` does exactly
+what you'd hope, briefly.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Undocumented, by design: `sl` (typo the classic way), `pacman` with no args
+(playable ASCII Pac-Man, arrows/hjkl, q quits), `cat /proc/shwetank/status`,
+`cat /proc/meminfo`, `git log` / `git blame readme.md` / `git status`,
+`systemctl status sleep.timer`, `journalctl`, `make hire-me`, `crt` (full
+CRT-monitor mode with power-on/off collapse; the Konami code also works),
+and `gravity` (everything on screen falls off the page, then floats back).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Visual layer
+
+- Skills graph is a 3D constellation: force-directed layout in three
+  dimensions, orbit camera, perspective projection — hand-rolled on 2D
+  canvas, no three.js. `[2d]` toggle for the flat draggable version.
+- Theme toggle does a circular wipe from the click point (View Transitions
+  API, graceful fallback).
+- Headings decode out of glyph noise on first scroll into view.
+- The scroll progress bar is Pac-Man eating dots toward a ghost; at 100%
+  he catches it.
+
+## How it's built
+
+- Next.js (App Router) + TypeScript + Tailwind v4, fully static output
+  (page, 404, and the OG image are all prerendered)
+- Light + dark themes: system preference by default, `--dark`/`--light`
+  toggle in the top bar, persisted, no flash on reload
+- Hero terminal replays the install once per session; skippable with Esc;
+  respects `prefers-reduced-motion`; full content is server-rendered so the
+  page works without JS
+- Dependency graph is a hand-rolled force simulation on canvas (draggable,
+  hover to trace edges, theme-aware); the table below it is the
+  accessible/no-JS version
+- Optional synthesized sound effects (Web Audio, `sfx:off` by default in the
+  terminal header)
+- No chart libraries, no animation libraries, no dark gradients — dark
+  *theme*, sure, but still one red
