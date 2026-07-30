@@ -1,7 +1,7 @@
 // Builds a real git repository out of the site content and publishes it into
 // public/ as static files, served via git's dumb HTTP protocol.
 //
-//   git clone https://shwetank.dev
+//   git clone https://shwetank.is-a.dev
 //
 // ...actually works. Runs automatically before `next build` (see "prebuild").
 
@@ -71,6 +71,11 @@ write(
     "You just cloned a human. Congratulations on your excellent taste in protocols.",
     "",
     ...readme.paragraphs.map((p) => p + "\n"),
+    "## Education",
+    "",
+    `- ${site.education.school}, Bangalore · ${site.education.program} · ${site.education.years}`,
+    `- ${site.education.parallel} (parallel)`,
+    "",
     "## Links",
     "",
     `- github: ${site.github}`,
@@ -110,7 +115,7 @@ write(
       version: site.version,
       description: site.tagline,
       license: "curiosity",
-      repository: "https://shwetank.dev",
+      repository: "https://shwetank.is-a.dev",
       dependencies: Object.fromEntries(
         deps
           .filter((d) => d.kind === "dependencies")

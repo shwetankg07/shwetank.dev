@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { site } from "@/lib/data";
 import "./globals.css";
 
@@ -15,7 +16,7 @@ const jbMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   // [PLACEHOLDER] — set metadataBase to the real domain once deployed
-  metadataBase: new URL("https://shwetank.dev"),
+  metadataBase: new URL("https://shwetank.is-a.dev"),
   title: "shwetank · developer, builder · the registry",
   description:
     "Shwetank, developer and CTO in Bangalore. Ships real products: three npm packages, a reverse-engineered keyboard driver, and a WebGL map of every train in India. Arch, btw.",
@@ -52,6 +53,7 @@ export default function RootLayout({
           skip to content
         </a>
         {children}
+        <Analytics />
       </body>
     </html>
   );

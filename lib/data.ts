@@ -6,16 +6,26 @@
 export const site = {
   name: "shwetank",
   // CalVer. Bump it whenever you ship something. It's part of the joke.
-  version: "2026.7.23",
+  version: "2026.7.30",
   status: "stable",
   tagline:
     "Developer, builder, and CTO in Bangalore. Ships real products, end to end.",
   location: "Bangalore, India",
+  education: {
+    school: "Scaler School of Technology",
+    program: "CS & AI",
+    parallel: "BSc Hons CS, BITS Pilani",
+    years: "2025–2029",
+    // Terse forms for metadata rows. The curl card is a fixed 46 columns, so it
+    // takes the shorter one; the sidebar can wrap and takes the full line.
+    line: "scaler sst + bits pilani bs · '29",
+    lineTerse: "scaler sst + bits pilani bs",
+  },
   email: "shwetankg07@gmail.com",
   github: "https://github.com/shwetankg07",
   linkedin: "https://www.linkedin.com/in/shwetankg07",
   handle: "shwetankg07",
-  installCmd: "pacman -S shwetank",
+  installCmd: "yay -S shwetank",
 };
 
 // ── README (about) ───────────────────────────────────────────────────────────
@@ -23,7 +33,7 @@ export const site = {
 export const readme = {
   paragraphs: [
     "I build products end to end, from the Postgres schema to the pixel. I've worked with early-stage startups where shipping fast and understanding the business mattered as much as the code, and that's shaped how I work: product first, stack second, ego last.",
-    "Along the way I've shipped real things: I reverse-engineered my Acer laptop's keyboard controller when Linux couldn't reach it (kbrgb), drew all 9,298 of India's trains onto a live WebGL map (RailRaag), and published three packages to npm. Right now I'm the CTO at chalyaaar runclub, a fitness-first events platform that's small, new, and already in profit. It's all below, versioned like everything else here.",
+    "Along the way I've shipped real things: I reverse-engineered my Acer laptop's keyboard controller when Linux couldn't reach it (kbrgb, now installable from the AUR and PyPI), drew all 9,298 of India's trains onto a live WebGL map (RailRaag), and published three packages to npm. Right now I'm the CTO at chalyaaar runclub, a fitness-first events platform that's small, new, and already in profit. It's all below, versioned like everything else here.",
     "I'm also going lower in the stack: learning Rust and containerization properly, because the tools I love most are the ones I understand all the way down. I do all of this from a terminal on Arch Linux, btw, inside Neovim.",
   ],
   badges: [
@@ -157,14 +167,18 @@ export const projects: Project[] = [
   },
   {
     name: "kbrgb",
-    version: "1.0.0",
+    version: "0.2.1",
     description:
-      "Reverse-engineered the Acer ENE KB5130 i2c-HID keyboard protocol on the 2025 Predator/Nitro laptops where WMI silently no-ops. One Python file, zero dependencies, 29 animated effects, and it upstreamed protocol findings of its own.",
+      "Reverse-engineered the Acer ENE KB5130 i2c-HID keyboard protocol on the 2025 Predator/Nitro laptops where WMI silently no-ops. One Python file, zero dependencies, 29 animated effects, and it upstreamed protocol findings of its own. Packaged for the AUR and PyPI, so anyone with the laptop can just install it.",
     tags: ["python", "reverse-engineering", "i2c-hid"],
-    stat: "29",
-    statLabel: "effects · 0 deps",
+    stat: "yay -S kbrgb",
+    statLabel: "AUR + PyPI",
     spark: [1, 2, 2, 3, 4, 6, 8, 11, 14, 18, 23, 29],
-    links: [{ label: "source", href: "https://github.com/shwetankg07/kbrgb" }],
+    links: [
+      { label: "AUR", href: "https://aur.archlinux.org/packages/kbrgb" },
+      { label: "PyPI", href: "https://pypi.org/project/kbrgb/" },
+      { label: "source", href: "https://github.com/shwetankg07/kbrgb" },
+    ],
   },
   {
     name: "RailRaag",
@@ -296,6 +310,16 @@ export const changelog: Release[] = [
       "feat: moved into Neovim full-time",
     ],
     breaking: true,
+  },
+  {
+    version: "v2025.8",
+    date: "Aug 2025",
+    title: "CS & AI @ Scaler SST",
+    notes: [
+      "feat: enrolled at Scaler School of Technology, Bangalore",
+      "feat: 4-year residential CS & AI program",
+      "feat: parallel BSc Hons in CS from BITS Pilani",
+    ],
   },
   {
     version: "v0.1.0",

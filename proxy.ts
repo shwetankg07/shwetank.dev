@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 // Terminals asking for the homepage get the ANSI card instead of HTML.
-// Browsers are unaffected. Try it: curl shwetank.dev
+// Browsers are unaffected. Try it: curl shwetank.is-a.dev
 
 export function proxy(request: NextRequest) {
   const ua = request.headers.get("user-agent") ?? "";

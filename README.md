@@ -1,6 +1,6 @@
 <div align="center">
 
-# `registry.shwetank.dev`
+# `registry.shwetank.is-a.dev`
 
 ### A portfolio that ships like a package.
 
@@ -16,7 +16,7 @@ Every one of those is real.
 ![npm](https://img.shields.io/npm/v/shwetank?style=flat-square&color=cb3837&label=npx%20shwetank)
 ![Arch](https://img.shields.io/badge/Arch-btw-1793d1?style=flat-square&logo=archlinux&logoColor=white)
 
-**[shwetank.dev](https://shwetank.dev)**
+**[shwetank.is-a.dev](https://shwetank.is-a.dev)**
 
 <!-- hero shot: drop a screenshot or a short GIF of the install animation here once deployed -->
 
@@ -27,9 +27,9 @@ Every one of those is real.
 ## Four ways to read it
 
 ```bash
-firefox https://shwetank.dev        # the website
-curl    shwetank.dev                # an ANSI business card, right in your terminal
-git     clone https://shwetank.dev  # yes, the domain itself is a git repo
+firefox https://shwetank.is-a.dev        # the website
+curl    shwetank.is-a.dev                # an ANSI business card, right in your terminal
+git     clone https://shwetank.is-a.dev  # yes, the domain itself is a git repo
 npx     shwetank                    # the real npm package
 ```
 
@@ -40,7 +40,7 @@ actually published.
 
 ## The hero terminal is a real shell
 
-The `pacman -S shwetank` install animation plays, then the prompt becomes a working
+The `yay -S shwetank` install animation plays, then the prompt becomes a working
 shell. Press `/` anywhere to focus it.
 
 `help` · `ls` · `cd <section>` · `cat PKGBUILD` · `neofetch` · `pacman -Qi shwetank`,

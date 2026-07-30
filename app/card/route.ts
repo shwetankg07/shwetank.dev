@@ -1,6 +1,6 @@
 import { site } from "@/lib/data";
 
-// What terminals see instead of the website. Try: curl shwetank.dev
+// What terminals see instead of the website. Try: curl shwetank.is-a.dev
 // (proxy.ts rewrites / here for curl/wget/httpie user agents)
 
 export const dynamic = "force-static";
@@ -38,6 +38,7 @@ function buildCard() {
     row("developer · student · builder"),
     row(`${site.location.toLowerCase()}`),
     row(),
+    label("education", site.education.lineTerse),
     label("github", `github.com/${site.handle}`),
     label("linkedin", `linkedin.com/in/${site.handle}`),
     label("email", site.email),
@@ -45,7 +46,7 @@ function buildCard() {
     row(`${G}${statusText}${X}`, statusText.length),
     row(),
     row(`${R}$${X} ${B}npx shwetank${X}${D}   · interactive card${X}`, "$ npx shwetank   · interactive card".length),
-    row(`${R}$${X} git clone https://shwetank.dev`, "$ git clone https://shwetank.dev".length),
+    row(`${R}$${X} git clone https://shwetank.is-a.dev`, "$ git clone https://shwetank.is-a.dev".length),
     row(),
     bottom,
     `  ${D}arch btw · ships real products, end to end${X}`,

@@ -26,7 +26,7 @@ type Line =
   | { k: "gap" };
 
 const LINES: Line[] = [
-  { k: "cmd", text: "sudo pacman -S shwetank" },
+  { k: "cmd", text: "yay -S shwetank" },
   { k: "dim", text: "resolving dependencies...", delay: 350 },
   { k: "dim", text: "checking for conflicts... none found.", delay: 450 },
   { k: "gap" },

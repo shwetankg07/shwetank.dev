@@ -244,7 +244,7 @@ export async function runCommand(raw: string, api: ShellApi, history: string[]) 
         api.push([
           out("fatal: wrong terminal."),
           ok("this actually works in a real one:"),
-          out("  git clone https://shwetank.dev"),
+          out("  git clone https://shwetank.is-a.dev"),
           dim("(yes, the domain itself is a git repo. go on, try it.)"),
         ]);
         return;
@@ -255,7 +255,7 @@ export async function runCommand(raw: string, api: ShellApi, history: string[]) 
             out(`${fakeHash(r.version)} (${r.version}) ${r.title.toLowerCase()}`)
           )
         );
-        api.push(dim("# full history: git clone https://shwetank.dev"));
+        api.push(dim("# full history: git clone https://shwetank.is-a.dev"));
         return;
       }
       if (sub === "blame") {
@@ -428,6 +428,9 @@ export async function runCommand(raw: string, api: ShellApi, history: string[]) 
           out(`Version       : ${site.version}`),
           out(`Description   : ${site.tagline}`),
           out(`URL           : ${site.github}`),
+          out(
+            `Education     : ${site.education.school} (${site.education.program}) · ${site.education.parallel}`,
+          ),
           out(`Licenses      : curiosity`),
           out(`Depends On    : typescript react postgresql caffeine`),
           out(`Optional Deps : rust [installing] docker [installing]`),

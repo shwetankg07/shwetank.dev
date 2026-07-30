@@ -39,7 +39,7 @@ export default function OpengraphImage() {
             s
           </div>
           <div style={{ fontSize: 28, color: "#6e6d66" }}>
-            {`registry.${site.name}.dev`}
+            {`registry.${site.name}.is-a.dev`}
           </div>
         </div>
 

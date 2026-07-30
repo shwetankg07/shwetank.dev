@@ -53,7 +53,7 @@ function TopBar() {
           <span>
             <span className="hidden min-[480px]:inline">registry.</span>
             {site.name}
-            <span className="text-muted">.dev</span>
+            <span className="text-muted">.is-a.dev</span>
           </span>
         </a>
         <nav className="flex items-center gap-4 font-mono text-xs sm:text-sm">
@@ -427,6 +427,7 @@ function Sidebar() {
     ],
     ["homepage", "you're on it"],
     ["location", site.location.toLowerCase()],
+    ["education", site.education.line],
     ["uptime", <Uptime key="u" />],
     ["runtime", "arch linux + neovim"],
     ["engines", "node ≥24 · caffeine ≥2.0"],
@@ -453,9 +454,6 @@ function Sidebar() {
             </code>
             <CopyButton text="npx shwetank" />
           </div>
-          <p className="mt-1.5 font-mono text-[11px] text-muted">
-            ↑ the second one actually works. published march 2026.
-          </p>
         </div>
         <dl className="space-y-4">
           {rows.map(([k, v]) => (
@@ -492,8 +490,8 @@ function Footer() {
         </p>
         <p>
           also works:{" "}
-          <span className="text-ink">curl shwetank.dev</span> ·{" "}
-          <span className="text-ink">git clone https://shwetank.dev</span> ·{" "}
+          <span className="text-ink">curl shwetank.is-a.dev</span> ·{" "}
+          <span className="text-ink">git clone https://shwetank.is-a.dev</span> ·{" "}
           <span className="text-ink">npx shwetank</span>
         </p>
       </div>
