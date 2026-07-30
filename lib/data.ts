@@ -200,8 +200,7 @@ export const projects: Project[] = [
     stat: "CTO",
     statLabel: "fitness, shipped",
     spark: [1, 1, 2, 3, 3, 5, 6, 8, 11, 14, 18, 23],
-    // [PLACEHOLDER] add the live site URL to `links` once it's ready.
-    links: [],
+    links: [{ label: "live", href: "https://chalyaaar.online" }],
   },
   {
     name: "Claribb.AI",

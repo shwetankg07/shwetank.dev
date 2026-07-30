@@ -15,7 +15,6 @@ const jbMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  // [PLACEHOLDER] — set metadataBase to the real domain once deployed
   metadataBase: new URL("https://shwetank.is-a.dev"),
   title: "shwetank · developer, builder · the registry",
   description:

@@ -156,14 +156,32 @@ export default function DepGraph() {
       const rect = wrap.getBoundingClientRect();
       width = rect.width;
       height = rect.height;
-      radius = Math.min(width, height) * 0.42;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      measure();
+      measure(); // before radius: the clamp below needs label box sizes
+
+      // Label boxes are drawn centred on the node, so the sphere has to leave
+      // room for half of the widest one. In 3d the perspective divide also
+      // magnifies both position (up to ~1.05x) and size (up to ~1.15x) for
+      // nodes near the viewer, hence the extra headroom. On wide screens the
+      // 0.42 term wins and this changes nothing; on a phone it's what keeps
+      // the graph inside the box.
+      let maxW = 0;
+      let maxH = 0;
+      for (const n of nodes) {
+        if (n.w > maxW) maxW = n.w;
+        if (n.h > maxH) maxH = n.h;
+      }
+      const fit = (extent: number, label: number) =>
+        (extent / 2 - (label / 2) * 1.15 - 6) / 1.06;
+      radius = Math.max(
+        60,
+        Math.min(Math.min(width, height) * 0.42, fit(width, maxW), fit(height, maxH)),
+      );
     };
 
     const step = () => {
