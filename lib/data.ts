@@ -5,6 +5,10 @@
 
 export const site = {
   name: "shwetank",
+  // The page calls him `shwetank` because he's a package here. Search engines
+  // need the legal name to match a person query against, so it lives in the
+  // <title>, the description, and the Person schema — never in the visible UI.
+  fullName: "Shwetank Gupta",
   // CalVer. Bump it whenever you ship something. It's part of the joke.
   version: "2026.7.30",
   status: "stable",
@@ -24,8 +28,13 @@ export const site = {
   email: "shwetankg07@gmail.com",
   github: "https://github.com/shwetankg07",
   linkedin: "https://www.linkedin.com/in/shwetankg07",
+  npm: "https://www.npmjs.com/~shwetankg07",
   handle: "shwetankg07",
   installCmd: "yay -S shwetank",
+  // Canonical origin. The domain is still hardcoded in ~15 older spots; new
+  // code should read it from here so the next move is a one-line change.
+  domain: "shwetank.is-a.dev",
+  url: "https://shwetank.is-a.dev",
 };
 
 // ── README (about) ───────────────────────────────────────────────────────────
