@@ -23,6 +23,9 @@ export const metadata: Metadata = {
     "Shwetank Gupta — developer and CTO in Bangalore. Three npm packages, a reverse-engineered Linux keyboard driver, and a WebGL map of every train in India.",
   authors: [{ name: site.fullName, url: site.url }],
   creator: site.fullName,
+  // Search Console, URL-prefix property. Must stay in the served HTML — Google
+  // re-checks it periodically, so removing it later un-verifies the property.
+  verification: { google: "K3_DoQrFbQfBT_wjG622_X5cGon5VfTv256c6-gxt2I" },
   // Kills the shwetank.vercel.app duplicate: both origins serve this page, and
   // this tells Google which one is the real address.
   alternates: { canonical: "/" },
