@@ -490,7 +490,7 @@ function Footer() {
         </p>
         <p>
           also works:{" "}
-          <span className="text-ink">curl shwetank.is-a.dev</span> ·{" "}
+          <span className="text-ink">curl -L shwetank.is-a.dev</span> ·{" "}
           <span className="text-ink">git clone https://shwetank.is-a.dev</span> ·{" "}
           <span className="text-ink">npx shwetank</span>
         </p>

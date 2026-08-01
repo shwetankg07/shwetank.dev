@@ -1,6 +1,6 @@
 import { site } from "@/lib/data";
 
-// What terminals see instead of the website. Try: curl shwetank.is-a.dev
+// What terminals see instead of the website. Try: curl -L shwetank.is-a.dev
 // (proxy.ts rewrites / here for curl/wget/httpie user agents)
 
 export const dynamic = "force-static";

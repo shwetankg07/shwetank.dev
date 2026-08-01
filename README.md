@@ -28,9 +28,9 @@ Every one of those is real.
 
 ```bash
 firefox https://shwetank.is-a.dev        # the website
-curl    shwetank.is-a.dev                # an ANSI business card, right in your terminal
+curl -L shwetank.is-a.dev                # an ANSI business card, right in your terminal
 git     clone https://shwetank.is-a.dev  # yes, the domain itself is a git repo
-npx     shwetank                    # the real npm package
+npx     shwetank                         # the real npm package
 ```
 
 No tricks behind any of them. `proxy.ts` sniffs the user agent and hands terminals the

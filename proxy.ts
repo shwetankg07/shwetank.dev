@@ -1,7 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 // Terminals asking for the homepage get the ANSI card instead of HTML.
-// Browsers are unaffected. Try it: curl shwetank.is-a.dev
+// Browsers are unaffected. Try it: curl -L shwetank.is-a.dev
+// (-L because Vercel 308s http->https at the edge, before this ever runs)
 
 export function proxy(request: NextRequest) {
   const ua = request.headers.get("user-agent") ?? "";
